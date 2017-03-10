@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router }            from '@angular/router';
 
 import { Hero }                from './hero';
+import { HeroDetailComponent }  from './hero-detail.component';
 import { HeroService }         from './hero.service';
 
 @Component({
@@ -45,6 +46,16 @@ export class HeroesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHeroes();
+  }
+
+  onOpen(event: any):any {
+    debugger;
+    console.log(event);
+  }
+
+  onClose(event: any):any {
+    debugger;
+    console.log(event);
   }
 
   onSelect(hero: Hero): void {

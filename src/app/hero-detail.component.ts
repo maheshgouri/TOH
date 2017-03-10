@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, EventEmitter, Output }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -14,6 +14,10 @@ import { HeroService } from './hero.service';
 })
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
+  public visible = true;
+
+  @Output() open: EventEmitter<any> =  new EventEmitter();
+  @Output() close: EventEmitter<any> =  new EventEmitter();
 
   constructor(
     private heroService: HeroService,
@@ -25,6 +29,18 @@ export class HeroDetailComponent implements OnInit {
     this.route.params
       .switchMap((params: Params) => this.heroService.getHero(+params['id']))
       .subscribe(hero => this.hero = hero);
+
+    //this.toggle();
+  }
+
+  toggle(): any {
+    this.visible = !this.visible;
+
+    if (this.visible) {
+      this.open.emit(this.visible);
+    } else {
+      this.close.emit(this.visible);
+    }
   }
 
   save(): void {

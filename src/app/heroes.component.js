@@ -48,6 +48,14 @@ var HeroesComponent = (function () {
     HeroesComponent.prototype.ngOnInit = function () {
         this.getHeroes();
     };
+    HeroesComponent.prototype.onOpen = function (event) {
+        debugger;
+        console.log(event);
+    };
+    HeroesComponent.prototype.onClose = function (event) {
+        debugger;
+        console.log(event);
+    };
     HeroesComponent.prototype.onSelect = function (hero) {
         this.selectedHero = hero;
     };

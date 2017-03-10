@@ -18,12 +18,25 @@ var HeroDetailComponent = (function () {
         this.heroService = heroService;
         this.route = route;
         this.location = location;
+        this.visible = true;
+        this.open = new core_1.EventEmitter();
+        this.close = new core_1.EventEmitter();
     }
     HeroDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params
             .switchMap(function (params) { return _this.heroService.getHero(+params['id']); })
             .subscribe(function (hero) { return _this.hero = hero; });
+        //this.toggle();
+    };
+    HeroDetailComponent.prototype.toggle = function () {
+        this.visible = !this.visible;
+        if (this.visible) {
+            this.open.emit(this.visible);
+        }
+        else {
+            this.close.emit(this.visible);
+        }
     };
     HeroDetailComponent.prototype.save = function () {
         var _this = this;
@@ -33,6 +46,14 @@ var HeroDetailComponent = (function () {
     HeroDetailComponent.prototype.goBack = function () {
         this.location.back();
     };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], HeroDetailComponent.prototype, "open", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], HeroDetailComponent.prototype, "close", void 0);
     HeroDetailComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
